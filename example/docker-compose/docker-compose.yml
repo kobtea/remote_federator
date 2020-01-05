@@ -1,0 +1,32 @@
+version: '3'
+services:
+  grafana:
+    image: grafana/grafana:6.5.2
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    ports:
+      - "3000:3000"
+  prometheus1:
+    image: prom/prometheus:v2.15.1
+    volumes:
+      - ./prometheus/prometheus1.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+  prometheus2:
+    image: prom/prometheus:v2.15.1
+    volumes:
+      - ./prometheus/prometheus2.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9091:9090"
+  federator:
+    image: kobtea/remote-federator
+    ports:
+      - "9999:9999"
+  node1:
+    image: prom/node-exporter:v0.18.1
+    ports:
+      - "9100:9100"
+  node2:
+    image: prom/node-exporter:v0.18.1
+  node3:
+    image: prom/node-exporter:v0.18.1

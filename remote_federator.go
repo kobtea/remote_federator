@@ -39,7 +39,8 @@ func (s Storage) Read(w io.Writer) error {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	for _, v := range s.storage {
-		if _, err := fmt.Fprintln(w, v.Metric.String(), v.Value.String(), v.Timestamp.String()); err != nil {
+		if _, err := fmt.Fprintln(w, v.Metric.String(), v.Value.String()); err != nil {
+		// if _, err := fmt.Fprintln(w, v.Metric.String(), v.Value.String(), v.Timestamp.String()); err != nil {
 			return err
 		}
 	}
